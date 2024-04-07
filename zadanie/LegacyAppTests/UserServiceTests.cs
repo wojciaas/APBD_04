@@ -75,7 +75,18 @@ public class UserServiceTests
         //Assert
         Assert.Throws<ArgumentException>(act);
     }
-    
+
     [Fact]
-    
+    public void AddUser_Should_Return_False_When_Client_Type_Is_Normal_Client_And_CreditLimit_Is_Less_Than_500()
+    {
+        //Arrange
+        var userService = new UserService();
+        var dateOfBirth = new DateTime(DateTime.Now.Year - 21, DateTime.Now.Month, DateTime.Now.Day);
+        
+        //Act
+        var result = userService.AddUser("Jan", "Kowalski", "kowalski@wp.pl", dateOfBirth, 1);
+        
+        //Assert
+        Assert.False(result);
+    }
 }
