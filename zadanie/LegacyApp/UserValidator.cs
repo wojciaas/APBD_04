@@ -4,6 +4,8 @@ namespace LegacyApp;
 
 public class UserValidator
 {
+    private const int MinimumAge = 21;
+    private const int MinimumCreditLimit = 500;
     public static bool Validate_Name(string name, string surname)
     {
         return !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(surname);
@@ -19,12 +21,12 @@ public class UserValidator
         var now = DateTime.Now;
         var age = now.Year - dateOfBirth.Year;
         if (now.Month < dateOfBirth.Month || (now.Month == dateOfBirth.Month && now.Day < dateOfBirth.Day)) age--;
-        return age >= 21;
+        return age >= MinimumAge;
     }
     
     public static bool Is_Credit_Limit_Required(User user)
     {
-        return user.HasCreditLimit && user.CreditLimit < 500;
+        return user.HasCreditLimit && user.CreditLimit < MinimumCreditLimit;
     }
     
 }
